@@ -20,8 +20,9 @@ function showRandomQuote (){
 
 // console.log(showRandomQuote());
 
-function createAddQuoteForm () {
-    quotes.push({text: "Beema, Benz, Bentley" , category: "Cars"});
+function createAddQuoteForm (text,category) {
+    const newQuote = {text,category};
+    quotes.push(newQuote);
 }
 
 console.log(createAddQuoteForm());
