@@ -1,6 +1,8 @@
 const quoteDisplay = document.getElementById('quoteDisplay');
 const quoteCategory = document.getElementById('quoteCategory');
 const newQuote = document.getElementById('newQuote');
+const newQuoteInput = document.getElementById('newQuoteText');
+const newQuoteCategory = document.getElementById('newQuoteCategory');
 
 const quotes = [
     {text: "Do hard things" , category: "Education"},
@@ -11,19 +13,25 @@ const quotes = [
     {text: "What's the cost of one customer?" , category: "Business"}
 ]
 
-// console.log(quotes[0].text);
 
 function showRandomQuote (){
     const randomQuote = Math.floor(Math.random() * quotes.length)
     return quotes[randomQuote].text;
 }
 
-// console.log(showRandomQuote());
 
 function createAddQuoteForm (text,category) {
     const newQuote = {text,category};
     quotes.push(newQuote);
 }
 
-console.log(createAddQuoteForm());
-console.log(quotes);
+newQuote.addEventListener('click', () => {
+    quoteDisplay.innerHTML = showRandomQuote();
+});
+
+function addQuote(){
+    let newEntry = {text: newQuoteInput.value, category: newQuoteCategory.value};
+    quotes.push(newEntry);
+    console.log(quotes);
+}
+
