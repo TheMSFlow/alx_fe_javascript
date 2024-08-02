@@ -5,18 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dynamic Quote Generator</title>
 </head>
-<body>
+<body style="width: fit-content;">
   <h1>Dynamic Quote Generator</h1>
   <div id="quoteDisplay"></div>
-  <div id="quoteCategory"></div>
   <div style="margin-bottom: 20px;"></div>
   <div>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button onclick="addQuote()">Add Quote</button>
+    <input style="padding: 6px;" id="newQuoteText" type="text" placeholder="Enter a new quote" />
+    <input style="padding: 6px;" id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+    <button style="cursor: pointer; padding: 6px; border: solid 1px #80AB82; background-color: #778472; color: aliceblue;" onclick="addQuote()" id="addQuote">Add Quote</button>
   </div>
-  <div style="margin-bottom: 20px;"></div>
-  <button id="newQuote">Show New Quote</button>
+  <div style = "background-color: beige; margin-top: 10px";>
+    <label for="importFile" style="padding-left: 10px; cursor: pointer;">Import Quotes</label>
+    <input style = "padding: 10px; cursor: pointer;" type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+  </div>
+  <div style="margin-bottom: 10px;"></div>
+  <button id="newQuote" style="width: 100%; background-color: #cbcbcb; border: none; padding: 6px; cursor: pointer;">Show New Quote</button>
   <script src="script.js"></script>
 </body>
 </html>
