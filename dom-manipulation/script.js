@@ -4,6 +4,7 @@ const newQuote = document.getElementById('newQuote');
 const newQuoteInput = document.getElementById('newQuoteText');
 const quoteList = document.createElement('div');
 const categoryFilter = document.getElementById('categoryFilter');
+const categoryContainer = document.getElementById('categoryContainer');
 
 // Load quotes from localStorage or set an empty array
 let quotes = JSON.parse(localStorage.getItem('quotes')) || []; 
@@ -12,8 +13,10 @@ let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
 // On page load, check if there's a saved category and display quotes accordingly
 window.onload = () => {
     const selectedCategory = JSON.parse(localStorage.getItem('selectedCategory'));
-    categoryFilter.value = JSON.parse(localStorage.getItem('selectedCategory'));
+    categoryFilter.value = JSON.parse(localStorage.getItem('selectedCategory')) || 'all';
+    loadCategoryList();
     filterQuotes(selectedCategory);
+
 };
 
 //function to display existing quotes
@@ -21,7 +24,6 @@ function displayQuotes() {
       const storedQuotes = JSON.parse(localStorage.getItem('quotes'));
       if(storedQuotes){
         quoteList.innerHTML = `<h2> All quotes </h2>`;
-        console.log(quotes.category);
         document.body.appendChild(quoteList);
         storedQuotes.forEach(quote => {
         const quoteElement = document.createElement('p');
@@ -78,13 +80,39 @@ function addQuote(){
 
     localStorage.setItem('quotes', JSON.stringify(quotes));
 
-    //Save selected category
-    const selectedCategory = categoryFilter.value;
-    localStorage.setItem('selectedCategory', JSON.stringify(selectedCategory));
-
     newQuoteInput.value = '';
     newQuoteCategory.value = '';
+    categoryFilter.value = 'all';
     displayQuotes();
+
+    let categoryExists = false;
+    for(let i = 0; i < categoryFilter.options.length; i++){
+      if (categoryFilter.options[i].value === newEntry.category){
+        categoryExists = true;
+        break;
+      }
+    }
+
+    if(!categoryExists){
+      const newCategory = document.createElement('option');
+      newCategory.value = newEntry.category;
+      newCategory.text = newEntry.category.charAt(0).toUpperCase() + newEntry.category.slice(1);
+      categoryFilter.appendChild(newCategory);
+      console.log(categoryFilter.innerHTML);
+
+      // save in local storage
+      localStorage.setItem('categoryList', JSON.stringify(categoryFilter.innerHTML));
+    }
+}
+
+//Function to load categories
+function loadCategoryList() {
+  let categoryList = JSON.parse(localStorage.getItem('categoryList'));
+  if (categoryList > 6) {
+    categoryFilter.innerHTML = categoryList;
+} else {
+  return
+}
 }
 
 // Function to show random quote
