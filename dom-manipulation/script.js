@@ -14,8 +14,8 @@ let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
 window.onload = () => {
     const selectedCategory = JSON.parse(localStorage.getItem('selectedCategory'));
     categoryFilter.value = JSON.parse(localStorage.getItem('selectedCategory')) || 'all';
-    loadCategoryList();
-    filterQuotes(selectedCategory);
+    populateCategories();
+    filterQuote(selectedCategory);
 
 };
 
@@ -106,7 +106,7 @@ function addQuote(){
 }
 
 //Function to load categories
-function loadCategoryList() {
+function populateCategories() {
   let categoryList = JSON.parse(localStorage.getItem('categoryList'));
   if (categoryList > 6) {
     categoryFilter.innerHTML = categoryList;
@@ -159,11 +159,11 @@ function importFromJsonFile(event) {
 categoryFilter.addEventListener('change', () => {
   const selectedCategory = categoryFilter.value;
   localStorage.setItem('selectedCategory', JSON.stringify(selectedCategory));
-  filterQuotes(selectedCategory);
+  filterQuote(selectedCategory);
 });
 
 
-function filterQuotes(category) {
+function filterQuote(category) {
   const storedQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
   const filteredQuotes = storedQuotes.filter(quote => quote.category === category || category === 'all');
   quoteList.innerHTML = ''; // Clear existing quotes
