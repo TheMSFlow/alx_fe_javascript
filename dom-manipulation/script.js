@@ -14,8 +14,7 @@ let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
 window.onload = () => {
     const selectedCategory = JSON.parse(localStorage.getItem('selectedCategory'));
     categoryFilter.value = JSON.parse(localStorage.getItem('selectedCategory')) || 'all';
-    populateCategories();
-    filterQuote(selectedCategory);
+    filterQuotes(selectedCategory);
 
 };
 
@@ -98,22 +97,24 @@ function addQuote(){
       newCategory.value = newEntry.category;
       newCategory.text = newEntry.category.charAt(0).toUpperCase() + newEntry.category.slice(1);
       categoryFilter.appendChild(newCategory);
-      console.log(categoryFilter.innerHTML);
+      console.log(categoryFilter.textContent);
 
       // save in local storage
-      localStorage.setItem('categoryList', JSON.stringify(categoryFilter.innerHTML));
+      localStorage.setItem('categoryList', JSON.stringify(categoryFilter.textContent));
     }
-}
+  }
 
-//Function to load categories
-function populateCategories() {
-  let categoryList = JSON.parse(localStorage.getItem('categoryList'));
-  if (categoryList > 6) {
-    categoryFilter.innerHTML = categoryList;
-} else {
-  return
-}
-}
+// //Function to load categories
+// function populateCategories() {
+//   let categoryList = JSON.parse(localStorage.getItem('categoryList'));
+//   if (categoryList > 6) {
+//     categoryFilter.innerHTML = categoryList;
+// } else {
+//   return
+// }
+// }
+
+
 
 // Function to show random quote
 function showRandomQuote (){
@@ -159,11 +160,11 @@ function importFromJsonFile(event) {
 categoryFilter.addEventListener('change', () => {
   const selectedCategory = categoryFilter.value;
   localStorage.setItem('selectedCategory', JSON.stringify(selectedCategory));
-  filterQuote(selectedCategory);
+  filterQuotes(selectedCategory);
 });
 
 
-function filterQuote(category) {
+function filterQuotes(category) {
   const storedQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
   const filteredQuotes = storedQuotes.filter(quote => quote.category === category || category === 'all');
   quoteList.innerHTML = ''; // Clear existing quotes
