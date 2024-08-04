@@ -7,7 +7,17 @@
 </head>
 <body style="width: fit-content;">
   <h1>Dynamic Quote Generator</h1>
-  <div id="quoteDisplay"></div>
+  <div style="width: 100%;">
+    <select id="categoryFilter" style="width: 100%; padding: 6px;">
+      <option value="all">All</option>
+      <option value="education">Education</option>
+      <option value="computer">Computer</option>
+      <option value="greeting">Greeting</option>
+      <option value="romance">Romance</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+
   <div style="margin-bottom: 20px;"></div>
   <div>
     <input style="padding: 6px;" id="newQuoteText" type="text" placeholder="Enter a new quote" />
@@ -18,6 +28,8 @@
     <label for="importFile" style="padding-left: 10px; cursor: pointer;">Import Quotes</label>
     <input style = "padding: 10px; cursor: pointer;" type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
   </div>
+  <div style="margin-bottom: 10px;"></div>
+  <div id="quoteDisplay"></div>
   <div style="margin-bottom: 10px;"></div>
   <button id="newQuote" style="width: 100%; background-color: #cbcbcb; border: none; padding: 6px; cursor: pointer;">Show New Quote</button>
   <script src="script.js"></script>
